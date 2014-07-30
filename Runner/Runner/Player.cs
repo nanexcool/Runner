@@ -32,7 +32,7 @@ namespace Runner
 
         Animation a;
 
-        Vector2 originalPosition = new Vector2(0, 240);
+        Vector2 originalPosition = new Vector2(50, 240);
 
         public Player()
         {
@@ -40,7 +40,7 @@ namespace Runner
             jumpPosition = Position.Y;
             //SourceRect = new Rectangle(0, 0, 108, 140);
 
-            a = new Animation("running_right", 8, 4, 108, 140);
+            a = new Animation("running_right", 8, 3, 108, 140);
         }
 
         public override void Update()

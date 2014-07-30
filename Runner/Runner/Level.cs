@@ -11,7 +11,8 @@ namespace Runner
 {
     class Level
     {
-        public Background Background { get; set; }
+        public Background BG { get; set; }
+        public Background Foreground { get; set; }
         public Texture2D[] ObstacleTextures { get; set; }
 
         public Player Player { get; set; }
@@ -42,8 +43,14 @@ namespace Runner
             Player = new Player();
             Player.Texture = game.Content.Load<Texture2D>("scott");
 
-            Background = new Background();
-            Background.Texture = game.Content.Load<Texture2D>("back2");
+            BG = new Background();
+            BG.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/Background 1a"));
+            BG.Speed = 0.2f;
+
+            Foreground = new Background();
+            Foreground.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/grass"));
+            Foreground.Position = new Vector2(0, 350);
+            Foreground.Speed = 3f;
 
             ObstacleTextures = new Texture2D[2];
             ObstacleTextures[0] = game.Content.Load<Texture2D>("tevez1");
@@ -86,7 +93,8 @@ namespace Runner
                 return;
             }
 
-            Background.Update();
+            BG.Update();
+            Foreground.Update();
 
             for (int i = 0; i < Obstacles.Count; i++)
             {
@@ -136,10 +144,12 @@ namespace Runner
 
         public void Draw()
         {
-            Background.Draw();
+            BG.Draw();
 
             Obstacles.ForEach(o => o.Draw());
             Player.Draw();
+
+            Foreground.Draw();
 
             if (Paused && !lost)
             {

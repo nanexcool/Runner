@@ -9,25 +9,32 @@ namespace Runner
 {
     class Background : Thing
     {
+        public List<Texture2D> Textures;
+
+        int index = 0;
+
+        public float Speed = 1f;
+
         public Background()
         {
-            Scale = 3;
+            Textures = new List<Texture2D>();
+            Color = Color.White;
         }
 
         public override void Update()
         {
-            Position -= Vector2.UnitX * 0.5f;
-            if (Position.X <= -Texture.Width * Scale)
+            Position -= Vector2.UnitX * Speed;
+            if (Position.X <= -Textures[index].Width * Scale)
             {
-                Position = Vector2.Zero;
+                Position.X = 0;
             }
             base.Update();
         }
 
         public override void Draw()
         {
-            Util.SpriteBatch.Draw(Texture, Position, SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
-            Util.SpriteBatch.Draw(Texture, Position + new Vector2(Texture.Width * Scale, 0), SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
+            Util.SpriteBatch.Draw(Textures[index], Position, SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
+            Util.SpriteBatch.Draw(Textures[index], Position + new Vector2(Textures[index].Width * Scale, 0), SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
         }
     }
 }
