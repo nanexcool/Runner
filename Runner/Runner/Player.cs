@@ -18,35 +18,39 @@ namespace Runner
         {
             get
             {
-                return a.SourceRect;
+                return currentAnimation.SourceRect;
             }
         }
+
+        int offset = 40;
 
         public override Rectangle Hitbox
         {
             get
             {
-                return new Rectangle((int)Math.Floor(Position.X), (int)Math.Floor(Position.Y), a.Width, a.Height);
+                return new Rectangle((int)Math.Floor(Position.X) + offset, (int)Math.Floor(Position.Y) + offset, currentAnimation.Width - offset * 2, currentAnimation.Height - offset * 2);
             }
         }
 
-        Animation a;
+        Animation currentAnimation;
+        List<Animation> animations;
 
         Vector2 originalPosition = new Vector2(50, 240);
 
-        public Player()
+        public Player(Texture2D texture)
         {
+            Texture = texture;
             Position = originalPosition;
             jumpPosition = Position.Y;
-            //SourceRect = new Rectangle(0, 0, 108, 140);
-
-            a = new Animation("running_right", 8, 3, 108, 140);
+            animations = new List<Animation>();
+            currentAnimation = new Animation("running_right", 8, 3, 108, 140);
+            animations.Add(currentAnimation);
         }
 
         public override void Update()
         {
             base.Update();
-            a.Update();
+            currentAnimation.Update();
             velocity.Y += 1f;
             Position.Y += velocity.Y;
 
@@ -57,17 +61,16 @@ namespace Runner
             }
         }
 
+        public override void Draw()
+        {
+            base.Draw();
+        }
+
         public void Reset()
         {
             Position = originalPosition;
             jumpPosition = Position.Y;
             velocity.Y = 0;
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
-            
         }
 
         public bool Jump()

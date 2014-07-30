@@ -35,6 +35,7 @@ namespace Runner
         {
             Util.SpriteBatch.Draw(Textures[index], Position, SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
             Util.SpriteBatch.Draw(Textures[index], Position + new Vector2(Textures[index].Width * Scale, 0), SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
+            //Util.SpriteBatch.Draw(Textures[index], Position + new Vector2(Textures[index].Width * Scale * 2, 0), SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
         }
     }
 }

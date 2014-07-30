@@ -42,16 +42,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="back2.jpg">
-      <Name>back2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="guy.png">
-      <Name>guy</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="obstacle.png">
       <Name>obstacle</Name>
       <Importer>TextureImporter</Importer>

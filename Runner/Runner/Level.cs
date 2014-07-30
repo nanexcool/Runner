@@ -21,6 +21,8 @@ namespace Runner
 
         public Input Input;
 
+        public Camera Camera { get; set; }
+
         public SoundEffect JumpSound { get; set; }
         public SoundEffect Coin { get; set; }
 
@@ -40,8 +42,7 @@ namespace Runner
         {
             Paused = true;
 
-            Player = new Player();
-            Player.Texture = game.Content.Load<Texture2D>("scott");
+            Player = new Player(game.Content.Load<Texture2D>("scott"));
 
             BG = new Background();
             BG.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/Background 1a"));
@@ -49,8 +50,9 @@ namespace Runner
 
             Foreground = new Background();
             Foreground.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/grass"));
-            Foreground.Position = new Vector2(0, 350);
-            Foreground.Speed = 3f;
+            Foreground.Position = new Vector2(0, 315);
+            Foreground.Speed = 20f;
+            Foreground.Scale = 2;
 
             ObstacleTextures = new Texture2D[2];
             ObstacleTextures[0] = game.Content.Load<Texture2D>("tevez1");
@@ -63,18 +65,18 @@ namespace Runner
             Obstacles = new List<Obstacle>();
 
             Input = new Input();
+
+            Camera = new Camera(Util.Width, Util.Height, Player);
         }
 
         public void Update()
         {
             Input.Update();
 
+            Camera.Update();
+
             if (Input.Jump())
-            {
-                if (MediaPlayer.State != MediaState.Playing)
-                {
-                    MediaPlayer.Play(Song);
-                }
+            {                
                 if (Paused)
                 {
                     Reset();
@@ -196,6 +198,10 @@ namespace Runner
         {
             foreach (Obstacle o in Obstacles)
             {
+                if (!o.Collidable)
+                {
+                    continue;
+                }
                 if (Player.Hitbox.Intersects(o.Hitbox))
                 {
                     return true;

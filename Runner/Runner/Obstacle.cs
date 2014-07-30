@@ -9,11 +9,13 @@ namespace Runner
 {
     class Obstacle : Thing
     {
-        float Speed = 10;
+        float Speed = 20;
+
+        public bool Collidable { get; set; }
 
         public Obstacle()
         {
-
+            Collidable = true;
         }
 
         public override void Update()

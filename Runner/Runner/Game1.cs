@@ -57,6 +57,10 @@ namespace Runner
             Util.SpriteBatch = spriteBatch;
 
             level = new Level(this);
+            if (MediaPlayer.State != MediaState.Playing)
+            {
+                MediaPlayer.Play(level.Song);
+            }
         }
 
         /// <summary>
@@ -92,6 +96,7 @@ namespace Runner
         {
             GraphicsDevice.Clear(Color.Black);
 
+            //spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, level.Camera.Transform);
             spriteBatch.Begin();
 
             level.Draw();

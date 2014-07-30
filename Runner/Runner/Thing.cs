@@ -49,7 +49,7 @@ namespace Runner
         public virtual void Draw()
         {
             Util.SpriteBatch.Draw(Texture, Position, SourceRect, Color, Rotation, Origin, Scale, Effects, 0);
-            //Util.SpriteBatch.Draw(Texture, Position, Hitbox, Color.Black * 0.5f, Rotation, Origin, Scale, Effects, 0);
+            //Util.SpriteBatch.Draw(Util.Texture, Hitbox, Hitbox, Color.Red * 0.5f, Rotation, Origin, Effects, 0);
         }
     }
 }
