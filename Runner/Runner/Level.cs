@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Runner
 {
@@ -22,6 +23,8 @@ namespace Runner
         public SoundEffect JumpSound { get; set; }
         public SoundEffect Coin { get; set; }
 
+        public Song Song { get; set; }
+
         public bool Paused { get; set; }
 
         bool lost = false;
@@ -37,7 +40,7 @@ namespace Runner
             Paused = true;
 
             Player = new Player();
-            Player.Texture = game.Content.Load<Texture2D>("guy");
+            Player.Texture = game.Content.Load<Texture2D>("scott");
 
             Background = new Background();
             Background.Texture = game.Content.Load<Texture2D>("back2");
@@ -48,6 +51,7 @@ namespace Runner
 
             JumpSound = game.Content.Load<SoundEffect>("Sounds/jump");
             Coin = game.Content.Load<SoundEffect>("Sounds/coin");
+            Song = game.Content.Load<Song>("Music/Plasticidio");
 
             Obstacles = new List<Obstacle>();
 
@@ -60,6 +64,10 @@ namespace Runner
 
             if (Input.Jump())
             {
+                if (MediaPlayer.State != MediaState.Playing)
+                {
+                    MediaPlayer.Play(Song);
+                }
                 if (Paused)
                 {
                     Reset();

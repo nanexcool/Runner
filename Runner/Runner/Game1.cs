@@ -25,6 +25,10 @@ namespace Runner
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Volumen
+            SoundEffect.MasterVolume = 0.2f;
+            MediaPlayer.Volume = 0.2f;
         }
 
         /// <summary>
