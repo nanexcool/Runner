@@ -14,15 +14,39 @@ namespace Runner
 
         Vector2 velocity = Vector2.Zero;
 
+        public override Rectangle? SourceRect
+        {
+            get
+            {
+                return a.SourceRect;
+            }
+        }
+
+        public override Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)Math.Floor(Position.X), (int)Math.Floor(Position.Y), a.Width, a.Height);
+            }
+        }
+
+        Animation a;
+
+        Vector2 originalPosition = new Vector2(0, 240);
+
         public Player()
         {
-            Position = new Vector2(100, Util.Height / 3);
+            Position = originalPosition;
             jumpPosition = Position.Y;
+            //SourceRect = new Rectangle(0, 0, 108, 140);
+
+            a = new Animation("running_right", 8, 4, 108, 140);
         }
 
         public override void Update()
         {
             base.Update();
+            a.Update();
             velocity.Y += 1f;
             Position.Y += velocity.Y;
 
@@ -35,7 +59,7 @@ namespace Runner
 
         public void Reset()
         {
-            Position = new Vector2(100, Util.Height / 3);
+            Position = originalPosition;
             jumpPosition = Position.Y;
             velocity.Y = 0;
         }

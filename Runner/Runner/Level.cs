@@ -37,7 +37,7 @@ namespace Runner
             Paused = true;
 
             Player = new Player();
-            Player.Texture = game.Content.Load<Texture2D>("guy");
+            Player.Texture = game.Content.Load<Texture2D>("scott");
 
             Background = new Background();
             Background.Texture = game.Content.Load<Texture2D>("back2");

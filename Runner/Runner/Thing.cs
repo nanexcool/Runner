@@ -11,14 +11,17 @@ namespace Runner
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position = Vector2.Zero;
-        public Rectangle? SourceRect;
+        public virtual Rectangle? SourceRect
+        {
+            get { return null; }
+        }
         public Color Color = Color.White;
         public Vector2 Origin = Vector2.Zero;
         public float Rotation = 0;
         public float Scale = 1;
         public SpriteEffects Effects = SpriteEffects.None;
 
-        public Rectangle Hitbox
+        public virtual Rectangle Hitbox
         {
             get
             {
