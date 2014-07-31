@@ -12,6 +12,7 @@ namespace Runner
     class Level
     {
         public Background BG { get; set; }
+        public Background Road { get; set; }
         public Background Foreground { get; set; }
         public Texture2D[] ObstacleTextures { get; set; }
 
@@ -46,7 +47,13 @@ namespace Runner
 
             BG = new Background();
             BG.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/Background 1a"));
+            BG.Scale = 1.4f;
             BG.Speed = 0.2f;
+
+            Road = new Background();
+            Road.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/road"));
+            Road.Speed = 10f;
+            Road.Position = new Vector2(0, 270);
 
             Foreground = new Background();
             Foreground.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/grass"));
@@ -55,7 +62,7 @@ namespace Runner
             Foreground.Scale = 2;
 
             ObstacleTextures = new Texture2D[2];
-            ObstacleTextures[0] = game.Content.Load<Texture2D>("tevez1");
+            ObstacleTextures[0] = game.Content.Load<Texture2D>("barrel");
             ObstacleTextures[1] = game.Content.Load<Texture2D>("tevez2");
 
             JumpSound = game.Content.Load<SoundEffect>("Sounds/jump");
@@ -96,6 +103,7 @@ namespace Runner
             }
 
             BG.Update();
+            Road.Update();
             Foreground.Update();
 
             for (int i = 0; i < Obstacles.Count; i++)
@@ -147,7 +155,7 @@ namespace Runner
         public void Draw()
         {
             BG.Draw();
-
+            Road.Draw();
             Obstacles.ForEach(o => o.Draw());
             Player.Draw();
 
@@ -181,7 +189,7 @@ namespace Runner
 
         private void AddObstacle()
         {
-            float y = Util.Random.NextDouble() > 0.5 ? 0 : Util.Height - ObstacleTextures[0].Height - 128;
+            float y = Util.Random.NextDouble() > 0.5 ? 0 : Util.Height - ObstacleTextures[0].Height - 64;
             Vector2 p = new Vector2(Util.Width - 32, y);
             Obstacles.Add(new Obstacle()
             {
