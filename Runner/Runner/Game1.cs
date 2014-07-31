@@ -68,10 +68,6 @@ namespace Runner
         void LoadLevel()
         {
             level = new Level(this);
-            if (MediaPlayer.State != MediaState.Playing)
-            {
-                MediaPlayer.Play(level.Song);
-            }
             loaded = true;
         }
 

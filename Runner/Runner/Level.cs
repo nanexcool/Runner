@@ -74,6 +74,11 @@ namespace Runner
             Input = new Input();
 
             Camera = new Camera(Util.Width, Util.Height, Player);
+
+            if (MediaPlayer.State != MediaState.Playing)
+            {
+                MediaPlayer.Play(Song);
+            }
         }
 
         public void Update()
