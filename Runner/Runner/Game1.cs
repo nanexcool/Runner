@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Threading;
 
 namespace Runner
 {
@@ -20,6 +21,8 @@ namespace Runner
         SpriteBatch spriteBatch;
 
         Level level;
+        bool loaded = false;
+        Texture2D loadingTexture;
 
         public Game1()
         {
@@ -56,11 +59,20 @@ namespace Runner
             Util.LoadContent(this);
             Util.SpriteBatch = spriteBatch;
 
+            loadingTexture = Content.Load<Texture2D>("Backgrounds/loading");
+
+            Thread t = new Thread(LoadLevel);
+            t.Start();
+        }
+
+        void LoadLevel()
+        {
             level = new Level(this);
             if (MediaPlayer.State != MediaState.Playing)
             {
                 MediaPlayer.Play(level.Song);
             }
+            loaded = true;
         }
 
         /// <summary>
@@ -83,7 +95,10 @@ namespace Runner
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            level.Update();
+            if (loaded)
+            {
+                level.Update();
+            }
 
             base.Update(gameTime);
         }
@@ -99,8 +114,15 @@ namespace Runner
             //spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, level.Camera.Transform);
             spriteBatch.Begin();
 
-            level.Draw();
-
+            if (!loaded)
+            {
+                spriteBatch.Draw(loadingTexture, Vector2.Zero, Color.White);
+            }
+            else
+            {
+                level.Draw();
+            }
+            
             //Util.SpriteBatch.DrawString(Util.Font, )
 
             spriteBatch.End();
