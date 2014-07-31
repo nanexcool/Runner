@@ -9,7 +9,7 @@ namespace Runner
 {
     class Obstacle : Thing
     {
-        float Speed = 20;
+        float Speed = 10f;
 
         public bool Collidable { get; set; }
 

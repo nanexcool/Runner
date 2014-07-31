@@ -51,7 +51,7 @@ namespace Runner
             Foreground = new Background();
             Foreground.Textures.Add(game.Content.Load<Texture2D>("Backgrounds/grass"));
             Foreground.Position = new Vector2(0, 315);
-            Foreground.Speed = 20f;
+            Foreground.Speed = 12f;
             Foreground.Scale = 2;
 
             ObstacleTextures = new Texture2D[2];
@@ -181,10 +181,6 @@ namespace Runner
 
         private void AddObstacle()
         {
-            if (Util.Random.NextDouble() < 0.1)
-            {
-                return;
-            }
             float y = Util.Random.NextDouble() > 0.5 ? 0 : Util.Height - ObstacleTextures[0].Height - 128;
             Vector2 p = new Vector2(Util.Width - 32, y);
             Obstacles.Add(new Obstacle()
