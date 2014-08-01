@@ -29,9 +29,13 @@ namespace Runner
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            
+
             // Volumen
-            SoundEffect.MasterVolume = 0.2f;
-            MediaPlayer.Volume = 0.2f;
+            float volume = 0;
+
+            SoundEffect.MasterVolume = volume;
+            MediaPlayer.Volume = volume;
         }
 
         /// <summary>
@@ -67,6 +71,7 @@ namespace Runner
 
         void LoadLevel()
         {
+            Thread.Sleep(1000);
             level = new Level(this);
             loaded = true;
         }
